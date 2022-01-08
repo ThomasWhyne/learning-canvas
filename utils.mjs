@@ -49,8 +49,9 @@ export function drawGrid(ctx, { step = 10, opacity = 0.5 } = {}) {
  */
 export function normalizePosition(ctx, x, y) {
   const { left, top } = ctx.canvas.getBoundingClientRect()
+  
   return {
-    x: x - left,
+    x: x - left ,
     y: y - top,
   }
 }
@@ -75,6 +76,7 @@ export function showHoverPosition(ctx) {
   })
   ctx.canvas.addEventListener('mouseenter', () => {
     imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height)
+    
   })
 
   ctx.canvas.addEventListener('mousemove', (e) => {
@@ -90,4 +92,8 @@ export function showHoverPosition(ctx) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
     ctx.putImageData(imageData, 0, 0)
   })
+}
+
+export function isObject(x) {
+  return typeof x === 'object' && !!x
 }
