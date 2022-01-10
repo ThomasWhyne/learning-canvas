@@ -1,4 +1,4 @@
-import { drawGrid, isObject,showHoverPosition } from '../utils.mjs'
+import { drawGrid, isObject, showHoverPosition, angleToRad } from '../utils.mjs'
 /**
  * @type { HTMLCanvasElement }
  */
@@ -16,17 +16,11 @@ height:${canvasHeight - 2}px;
 margin:auto;
 `
 
-function angleToRad(x) {
-  return (Math.PI / 180) * x
-}
-
 const ctx = ele.getContext('2d')
 
 const scale = window.devicePixelRatio + 1
 
 ctx.scale(scale, scale)
-
-
 
 function transformValue(x) {
   return Math.floor(x / scale)
@@ -46,7 +40,6 @@ function drawDialPlate() {
   ctx.arc(originX, originY, r, 0, 2 * Math.PI, true)
   ctx.stroke()
   ctx.closePath()
-
 
   ctx.beginPath()
   ctx.arc(originX, originY, 1, 0, 2 * Math.PI)
@@ -149,7 +142,7 @@ function drawHand(value, { step = 360 / 60, ratio = 0.6, rotate = -90 } = {}) {
 function updateHands(value) {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
   drawDialPlate(ctx)
-  
+
   const date = new Date()
 
   drawHand(date.getHours() % 12, { step: 360 / 12, ratio: 0.4 })
@@ -157,10 +150,12 @@ function updateHands(value) {
   drawHand(date.getSeconds(), { ratio: 0.6 })
   ctx.save()
   ctx.font = 'bold 16px Helvetica'
-  ctx.fillText(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,20,20)
-  setTimeout(updateHands,1000)
+  ctx.fillText(
+    `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+    20,
+    20
+  )
+  setTimeout(updateHands, 1000)
 }
 
 updateHands()
-
-
