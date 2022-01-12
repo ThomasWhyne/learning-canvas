@@ -1,4 +1,4 @@
-import { drawGrid, isObject, showHoverPosition, angleToRad } from '../utils.mjs'
+import { drawGrid, isObject, showHoverPosition, angleToRad } from '../../utils.mjs'
 /**
  * @type { HTMLCanvasElement }
  */

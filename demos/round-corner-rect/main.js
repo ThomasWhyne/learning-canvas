@@ -1,4 +1,4 @@
-import { drawGrid, showHoverPosition } from '../utils.mjs'
+import { drawGrid, showHoverPosition } from '../../utils.mjs'
 /**
  * @type { HTMLCanvasElement }
  */

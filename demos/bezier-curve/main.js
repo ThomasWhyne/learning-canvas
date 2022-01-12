@@ -1,4 +1,4 @@
-import { drawGrid, showHoverPosition } from '../utils.mjs'
+import { drawGrid, showHoverPosition } from '../../utils.mjs'
 /**
  * @type { HTMLCanvasElement }
  */
@@ -33,9 +33,9 @@ function drawBackground() {
 
 const points = [
   { x: 50, y: 50 },
-  { x: 200, y: 200 },
+  { x: 50 , y: 200 },
   { x: 250, y: 50 },
-  { x: 500, y: 200 },
+  { x: 250, y: 50 },
 ]
 
 function drawQudraticOne() {
@@ -70,7 +70,10 @@ function drawLine() {
 }
 let t = 0
 function drawAnimatedPoints() {
-  if (t > 1) t = 0
+  if (t > 1){
+    t = 0
+    return setTimeout(drawAnimatedPoints,2000)
+  }
   ctx.clearRect(0, 0, cav.width, cav.height)
   init()
   ctx.save()
