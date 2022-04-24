@@ -100,3 +100,89 @@ export function isObject(x) {
 export function angleToRad(x) {
   return (Math.PI / 180) * x
 }
+
+/**
+ * @param { [number, number] } range
+ * @param {{
+ *  fix: number
+ * }} opt
+ */
+export function getRandomNumber(range = [0, 100], opt = {}) {
+  let normOpt = opt
+  if (!isObject(normOpt)) normOpt = {}
+  if (typeof opt === 'number') normOpt.fix = opt
+  if (typeof normOpt.fix !== 'number') normOpt.fix = 0
+
+  const start = Math.min.apply(Math, range)
+  const end = Math.max.apply(Math, range)
+
+  return Number((Math.random() * (end - start)).toFixed(normOpt.fix)) + start
+}
+
+/**
+ * @param { number } width
+ * @param { number } height
+ * @returns {[import("./global").Point,import("./global").Point]}
+ */
+export function generateRandomPath(width, height) {
+  const p1 = {
+    x: getRandomNumber([0, width]),
+    y: getRandomNumber([0, height]),
+  }
+
+  const p2 = {
+    x: getRandomNumber([0, width]),
+    y: getRandomNumber([0, height]),
+  }
+
+  return [p1, p2]
+}
+
+/**
+ * @param {import("./global").Point} p1
+ * @param {import("./global").Point} y1
+ * @param {import("./global").Point} p2
+ * @param {import("./global").Point} y2
+ */
+export function getPathRandomPointNaive(p1, p2) {
+  if (p1.x === p2.x)
+    return {
+      x: p1.x,
+      y: getRandomNumber([p1.y, p2.y]),
+    }
+  if (p1.y === p2.y)
+    return {
+      x: getRandomNumber([p1.x, p2.x]),
+      y: p1.y,
+    }
+  const x = getRandomNumber([p1.x, p2.x])
+  const k = (p2.y - p1.y) / (p2.x - p1.x)
+  const y = k * (x - p1.x) + p1.y
+
+  return {
+    x,
+    y,
+  }
+}
+
+/**
+ * @param { import("./global").Point } p1
+ * @param { import("./global").Point } p2
+ * @param { number } step
+ */
+export function getPathRandomPoint(p1, p2, step = 3) {
+  return bezier(getRandomNumber([0, 1], step), p1, p2)
+}
+
+/**
+ * @param { number } t
+ * @param { import("./global").Point } p1
+ * @param { import("./global").Point } p2
+ */
+export function bezier(t, p1, p2) {
+  const point = {
+    x: t * (p2.x - p1.x) + p1.x,
+    y: t * (p2.y - p1.y) + p1.y,
+  }
+  return point
+}

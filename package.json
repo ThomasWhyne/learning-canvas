@@ -1,0 +1,25 @@
+{
+  "name": "canvas",
+  "version": "0.0.1",
+  "description": "canvas",
+  "main": "create.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasWhyne/learning-canvas.git"
+  },
+  "keywords": [
+    "canvas"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomasWhyne/learning-canvas/issues"
+  },
+  "homepage": "https://github.com/ThomasWhyne/learning-canvas#readme",
+  "devDependencies": {
+    "jest": "^27.4.7"
+  }
+}
